@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './product.dart';
+import '../Food Show/product.dart';
 
 class FastFood extends StatelessWidget {
   final String images;
@@ -25,8 +25,12 @@ class FastFood extends StatelessWidget {
                 child: GestureDetector(
               child: Image.asset('$images'),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Product()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Product(
+                              productType: "Fast Food",
+                            )));
               },
             ))),
         SizedBox(
@@ -139,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                // SizedBox(height: 5,),
+                
 
                 SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -229,28 +233,25 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     // Max Size Widget
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Product(productType: "Fruits")));
+                      },
                       child: Container(
                         width: double.infinity,
-                        // margin: EdgeInsets.symmetric(horizontal: 5),
                         height: 300,
-                        //color: Colors.green,
                         child: Expanded(
                           child: Image.asset('images/fruits.jpg'),
                         ),
                       ),
                     ),
                     Positioned(
-                      //top: 30
                       bottom: 70,
                       left: 20,
-                      //this.bottom,
-                      //this.left,
-
                       child: Container(
-                          //  height: 100,
-                          // width: 150,
-                          // color: Colors.blue,
                           child: Column(
                         children: [
                           Text(
@@ -288,7 +289,15 @@ class _HomePageState extends State<HomePage> {
                         height: 300,
                         //color: Colors.green,
                         child: Expanded(
-                          child: Image.asset('images/burger1.jpg'),
+                          child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Product(productType: "Fast Food")));
+                              },
+                              child: Image.asset('images/burger1.jpg')),
                         ),
                       ),
                     ),
