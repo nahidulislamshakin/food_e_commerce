@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             DrawerHeader(
               child: Column(
-                children: [
+                children: const [
                   CircleAvatar(
                     radius: 55,
                     backgroundColor: Colors.green,
@@ -123,20 +123,7 @@ class _HomePageState extends State<HomePage> {
                                   letterSpacing: 1,
                                   fontWeight: FontWeight.bold)),
                         ),
-                        Text(' Electronices ',
-                            style: TextStyle(
-                                fontSize: 15,
-                                letterSpacing: 1,
-                                fontWeight: FontWeight.bold)),
-                        SizedBox(
-                          width: 10,
-                          child: Text('/',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  letterSpacing: 1,
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                        Text('AC',
+                        Text('Foods',
                             style: TextStyle(
                                 fontSize: 15,
                                 letterSpacing: 1,
