@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
-import 'Home Pages/home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/models/product_list.dart';
+import 'package:shop_app/widgets/details/details_main.dart';
+import 'package:shop_app/widgets/home/home_main_page.dart';
+import 'package:shop_app/widgets/productCart/cart.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(
-      theme: ThemeData.light().copyWith(
-                textTheme: TextTheme(
-          bodyText2:  TextStyle(fontSize: 30.0, fontFamily: 'Hind',color: Colors.black)  
-        ), 
+    return ChangeNotifierProvider.value(
+      value: ProductProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: HomePage(),
+        routes: {
+          '/product-details': (context) => const ProductDetailsPage(),
+          '/my-cart': (context) => const MyCart(),
+        },
       ),
-      debugShowCheckedModeBanner: false,
-      home: HomePage()
-
     );
   }
 }
-
