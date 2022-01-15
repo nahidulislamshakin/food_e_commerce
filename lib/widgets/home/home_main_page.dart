@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/models/food/food_list.dart';
 import 'package:shop_app/models/product_list.dart';
+import 'package:shop_app/screens/sliver/food.dart';
+import 'package:shop_app/widgets/home/home_drawer.dart';
 
 import 'sliver_adaptor.dart';
 import 'sliver_data.dart';
@@ -17,28 +20,9 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _editingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final _provider = Provider.of<ProductProvider>(context, listen: false);
+    final _provider = Provider.of<FoodProvider>(context, listen: false);
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              child: Column(
-                children: const [
-                  CircleAvatar(
-                    radius: 55,
-                    backgroundColor: Colors.green,
-                  ),
-                  Text(
-                    'Limon ray',
-                    style: TextStyle(fontSize: 16),
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+      drawer: HomeDrawer(),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -65,6 +49,9 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    SizedBox(
+                      height: 10,
+                    ),
                     TextField(
                       controller: _editingController,
                       style: TextStyle(color: Colors.white, letterSpacing: 2.0),
@@ -89,9 +76,6 @@ class _HomePageState extends State<HomePage> {
                         _provider.setSearchString = value;
                       },
                     ),
-                    SizedBox(
-                      height: 10,
-                    )
                   ],
                 ),
               ),
@@ -107,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 10.0),
                     child: Row(
-                      children: const [
+                      children: [
                         Text(
                           'Home ',
                           style: TextStyle(
@@ -123,7 +107,20 @@ class _HomePageState extends State<HomePage> {
                                   letterSpacing: 1,
                                   fontWeight: FontWeight.bold)),
                         ),
-                        Text('Foods',
+                        Text(' Electronices ',
+                            style: TextStyle(
+                                fontSize: 15,
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.bold)),
+                        SizedBox(
+                          width: 10,
+                          child: Text('/',
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  letterSpacing: 1,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                        Text('AC',
                             style: TextStyle(
                                 fontSize: 15,
                                 letterSpacing: 1,
@@ -135,8 +132,15 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          HomeSliverAdapter(),
-          SliverProduct()
+          HomeSliverAdapter(
+            productLength: _provider.products.length,
+          ),
+          //  FoodSliverProduct(
+          //     productList: Provider.of<FoodProvider>(context).products,
+          //   )
+          FoodSliverProduct(
+            productList: Provider.of<FoodProvider>(context).products,
+          )
         ],
       ),
       endDrawer: Drawer(
